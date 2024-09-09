@@ -1,4 +1,4 @@
-- * Python version: * 3.10.10
+* Python version: * 3.10.10
 
 Rodar detro de um env (Windows):
 
