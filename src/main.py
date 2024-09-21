@@ -6,6 +6,7 @@ from rmn import RMN
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
 from view.Menu import MenuScreen
+from view.Game import GameScreen
 
 rmn = RMN()
 
@@ -13,7 +14,7 @@ class ExpressionGameApp(App):
     def build(self):
         sm = ScreenManager()
         sm.add_widget(MenuScreen(name='menu'))
-        # sm.add_widget(GameScreen(name='game'))
+        sm.add_widget(GameScreen(name='game'))
         return sm
 
 if __name__ == "__main__":

@@ -12,7 +12,7 @@ Rodar detro de um env (Windows):
     - pip install -r requirements.txt
 
     * Rodar o projeto: *
-    - cd /src
+    - cd ./src
     - python main.py
 
     * Desativar Ambiente Virtual: *
