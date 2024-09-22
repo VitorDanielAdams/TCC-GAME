@@ -30,16 +30,14 @@ class MenuScreen(Screen):
         
         # Botões arredondados
         button_jogar = self.create_rounded_button("Jogar", (0.4, 0.25, 0.2, 1), self.start_game)
-        button_alunos = self.create_rounded_button("Alunos", (0.5, 0.35, 0.25, 1))
-        button_instrucoes = self.create_rounded_button("Instruções", (0.6, 0.45, 0.35, 1))
+        button_settings = self.create_rounded_button("Configuração", (0.5, 0.35, 0.25, 1), self.settings)
         button_sair = self.create_rounded_button("Sair", (0.5, 0.4, 0.3, 1), self.exit_game)
         
         # Adiciona os widgets ao layout
         layout.add_widget(title)
         layout.add_widget(spacer) 
         layout.add_widget(button_jogar)
-        layout.add_widget(button_alunos)
-        layout.add_widget(button_instrucoes)
+        layout.add_widget(button_settings)
         layout.add_widget(button_sair)
         
         self.add_widget(layout)
@@ -76,8 +74,12 @@ class MenuScreen(Screen):
 
     def start_game(self, instance):
         # Ação para iniciar o jogo
-        self.manager.current = 'game'
+        self.manager.current = 'game_screen'
+
+    def settings(self, instance):
+        self.manager.current = 'settings_screen'
 
     def exit_game(self, instance):
         # Ação para sair do jogo
+        App.get_running_app().stop()
         sys.exit()
