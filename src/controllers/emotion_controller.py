@@ -1,18 +1,42 @@
 import cv2
+from model.rmn_model import RMNModel
 
 class EmotionController:
-    def __init__(self, model):
-        self.model = model
+    def __init__(self):
+        self.rmn_model = RMNModel()
 
-    def capture_frames(self, video_source=0, num_frames=5):
-        """Captura múltiplos frames da webcam."""
-        cap = cv2.VideoCapture(video_source)
-        frames = []
+    def process_images(self, frame):
+        detected_emotion, confidence, xmin, xmax, ymin, ymax = self.rmn_model.recognize_expression(frame)
         
-        for _ in range(num_frames):
-            ret, frame = cap.read()
-            if ret:
-                frames.append(frame)
+        annotated_frame = frame.copy()
+        cv2.rectangle(annotated_frame, (xmin, ymin), (xmax, ymax), (255, 0, 0), 2)
+        cv2.putText(annotated_frame, f"{detected_emotion} ({confidence:.2f})", 
+                    (xmin, ymin - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
+        return detected_emotion, confidence, annotated_frame
+    
+    def evaluate_emotion(self, frames, expected_emotion):
+        result = None
+        max = 0
+        result_image = frames[0]
         
-        cap.release()
-        return frames
+        for frame in frames:
+            emotion, probability, result_image = self.process_images(frame)
+            if probability > 0.75 and probability > max:
+                result = emotion
+        
+        if result == expected_emotion:
+            return True, result_image
+        return False, result_image
+    
+    def translate(self, emolabel):
+        self.emo_dict = {
+            'happy': 'Feliz',
+            'sad': 'Triste',
+            'neutral': 'Neutro',
+            'disgust': 'Nojo',
+            'fear': 'Medo',
+            'angry': 'Bravo',
+            'surprise': 'Surpreso'
+        }
+
+        return self.emo_dict.get(emolabel, 'Emoção desconhecida')

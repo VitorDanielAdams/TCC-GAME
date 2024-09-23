@@ -7,5 +7,7 @@ class RMNModel:
     def recognize_expression(self, frame):
         results = self.model.detect_emotion_for_single_frame(frame)
         if results:
-            return results[0]['emo_label'], results[0]['emo_proba']
-        return None, 0.0
+            result = results[0]
+            return result['emo_label'], result['emo_proba'], result['xmin'], result['xmax'], result['ymin'], result['ymax']
+
+        return None, 0.0, {}

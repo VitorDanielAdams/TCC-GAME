@@ -74,7 +74,7 @@ class MenuScreen(Screen):
 
     def start_game(self, instance):
         # Ação para iniciar o jogo
-        self.manager.current = 'game_screen'
+        self.manager.current = 'loading_screen'
 
     def settings(self, instance):
         self.manager.current = 'settings_screen'
