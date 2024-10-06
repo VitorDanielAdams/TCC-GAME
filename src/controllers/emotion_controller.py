@@ -6,7 +6,10 @@ class EmotionController:
         self.rmn_model = RMNModel()
 
     def process_images(self, frame):
-        detected_emotion, confidence, xmin, xmax, ymin, ymax = self.rmn_model.recognize_expression(frame)
+        result = self.rmn_model.recognize_expression(frame)
+        if result[0] is None:
+            return None, 0, None
+        detected_emotion, confidence, xmin, xmax, ymin, ymax = result
         
         annotated_frame = frame.copy()
         cv2.rectangle(annotated_frame, (xmin, ymin), (xmax, ymax), (255, 0, 0), 2)
@@ -21,9 +24,12 @@ class EmotionController:
         
         for frame in frames:
             emotion, probability, result_image = self.process_images(frame)
-            if probability > 0.75 and probability > max:
+            if probability > 0.7 and probability > max:
                 result = emotion
         
+        if result_image is None:
+            result_image = frames[0]
+
         if result == expected_emotion:
             return True, result_image
         return False, result_image

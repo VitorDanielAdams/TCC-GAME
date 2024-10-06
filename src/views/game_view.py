@@ -63,6 +63,8 @@ class GameScreen(Screen):
 
     def on_enter(self, *args):
         # Inicia a exibição da webcam e o temporizador ao entrar na tela do jogo
+        self.instruction_label.text = "Ao final do tempo, imite a emoção"
+        self.phase_label.text = f"Fase: {self.controller.level}"
         Clock.schedule_interval(self.update_webcam, 1.0 / 60.0)
         self.start_phase(self.controller.level, self.controller.scoring_model.get_score())
 
@@ -90,7 +92,7 @@ class GameScreen(Screen):
         self.emotion_label.text = self.emotion_controller.translate(self.current_emotion)
         
         # Reinicia o temporizador
-        self.timer_seconds = 5
+        self.timer_seconds = 6
         Clock.schedule_interval(self.update_timer, 1)
 
     def update_timer(self, dt):
@@ -104,7 +106,8 @@ class GameScreen(Screen):
     def evaluate_emotion(self):
         frames = self.video_controller.capture_frames(5)
         result, result_image = self.emotion_controller.evaluate_emotion(frames, self.current_emotion)
-        
+        self.timer_seconds = 6
+
         if result:
             self.controller.set_result(correct=True, image=result_image) 
         else:

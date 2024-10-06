@@ -49,7 +49,7 @@ class LevelController:
         self.last_result = None
 
     def reset_game(self):
-        self.current_phase = 1
+        self.level = 1
         self.last_result = None
         self.emotion_image = None
         self.current_emotion = None

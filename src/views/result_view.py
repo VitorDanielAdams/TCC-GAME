@@ -69,8 +69,13 @@ class ResultScreen(Screen):
 
     def on_button_press(self, instance):
         if self.action_button.text == "Próxima Fase":
-            self.controller.next_level()
-            self.manager.current = 'game_screen'
+            self.controller.current_emotion = None
+            if self.controller.is_last_phase():
+                self.manager.current = 'final_score_screen'
+            else:
+                self.controller.next_level()
+                self.manager.current = 'game_screen'
         else:
             self.controller.retry_same_emotion() 
+            self.controller.current_emotion = None
             self.manager.current = 'game_screen'
