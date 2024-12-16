@@ -4,7 +4,7 @@ import random
 class LevelController:
     def __init__(self):
         self.level = 1
-        self.total_rounds = 3  # Padrão inicial, pode ser configurado via tela de configurações
+        self.total_rounds = 3 # Padrão inicial, pode ser configurado via tela de configurações
         self.scoring_model = ScoringModel()
         self.last_emotion = None
         self.current_emotion = None

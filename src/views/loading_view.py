@@ -46,7 +46,7 @@ class LoadingScreen(Screen):
     def update_progress(self, dt):
         if self.progress_value < 70:
             # Progresso inicial até 70% antes de iniciar a câmera
-            self.progress_value += (70 / (10 * 30))  # Avança em 10 segundos * 30fps
+            self.progress_value += (70 / (6 * 30))  # Avança em 10 segundos * 30fps
         elif not self.capture_started:
             # Inicializa a captura de vídeo e espera até estar ativo
             self.video_controller.start_capture()
