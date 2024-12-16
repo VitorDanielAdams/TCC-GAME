@@ -29,7 +29,7 @@ class ResultScreen(Screen):
 
         # Mensagem de acerto ou erro (colorida)
         self.result_message = Label(text="", font_size='30sp', color=(1, 1, 1, 1),
-                                    size_hint=(None, None), size=(300, 50), pos_hint={'x': 0.35, 'y': 0.7})
+                                    size_hint=(None, None), size=(300, 50), pos_hint={'x': 0.4, 'y': 0.3})
         self.layout.add_widget(self.result_message)
 
         # Imagem da emoção (centrada na tela)
@@ -37,7 +37,7 @@ class ResultScreen(Screen):
         self.layout.add_widget(self.result_image)
 
         # Botão de próxima fase ou tente novamente
-        self.action_button = Button(text="", font_size='20sp', size_hint=(0.4, 0.1), pos_hint={'x': 0.3, 'y': 0.1})
+        self.action_button = Button(text="Próxima Fase", font_size='20sp', size_hint=(0.4, 0.1), pos_hint={'x': 0.3, 'y': 0.1})
         self.action_button.bind(on_press=self.on_button_press)
         self.layout.add_widget(self.action_button)
 
@@ -61,21 +61,21 @@ class ResultScreen(Screen):
         if correct:
             self.result_message.text = "Acertou!"
             self.result_message.color = (0, 1, 0, 1)
-            self.action_button.text = "Próxima Fase"
+            # self.action_button.text = "Próxima Fase"
         else:
             self.result_message.text = "Errou!"
             self.result_message.color = (1, 0, 0, 1)
-            self.action_button.text = "Tente Novamente"
+            # self.action_button.text = "Tente Novamente"
 
     def on_button_press(self, instance):
-        if self.action_button.text == "Próxima Fase":
+        # if self.action_button.text == "Próxima Fase":
             self.controller.current_emotion = None
             if self.controller.is_last_phase():
                 self.manager.current = 'final_score_screen'
             else:
                 self.controller.next_level()
                 self.manager.current = 'game_screen'
-        else:
-            self.controller.retry_same_emotion() 
-            self.controller.current_emotion = None
-            self.manager.current = 'game_screen'
+        # else:
+        #     self.controller.retry_same_emotion() 
+        #     self.controller.current_emotion = None
+        #     self.manager.current = 'game_screen'

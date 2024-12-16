@@ -11,7 +11,7 @@ class LevelController:
         self.last_result = None
 
     def get_next_emotion(self):
-        emotions = ["happy", "sad", "angry", "fear", "disgust", "surprise"]
+        emotions = ["happy", "sad", "angry", "surprise"]
         emotion = random.choice(emotions)
 
         # Evitar repetição da mesma emoção

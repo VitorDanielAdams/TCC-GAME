@@ -39,7 +39,7 @@ class GameScreen(Screen):
         self.layout.add_widget(self.instruction_label)
 
         # Temporizador no rodapé
-        self.timer_label = Label(text="Tempo restante: 10s", font_size='20sp', color=(1, 1, 1, 1),
+        self.timer_label = Label(text="Tempo restante: 6s", font_size='20sp', color=(1, 1, 1, 1),
                                  size_hint=(None, None), size=(300, 50), pos_hint={'x': 0.35, 'y': 0.75})
         self.layout.add_widget(self.timer_label)
 
@@ -87,7 +87,7 @@ class GameScreen(Screen):
         self.current_emotion = self.controller.get_next_emotion()
 
         # Atualiza a imagem e o texto da emoção
-        self.expression_image.source = f"assets/images/{self.current_emotion}/{random.randrange(0,1)}.jpg"
+        self.expression_image.source = f"assets/images/{self.current_emotion}/{random.randrange(0,2)}.jpg"
 
         self.emotion_label.text = self.emotion_controller.translate(self.current_emotion)
         

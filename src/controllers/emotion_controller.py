@@ -13,7 +13,7 @@ class EmotionController:
         
         annotated_frame = frame.copy()
         cv2.rectangle(annotated_frame, (xmin, ymin), (xmax, ymax), (255, 0, 0), 2)
-        cv2.putText(annotated_frame, f"{detected_emotion} ({confidence:.2f})", 
+        cv2.putText(annotated_frame, f"{self.translate(detected_emotion)} ({confidence:.2f})", 
                     (xmin, ymin - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 0, 0), 2)
         return detected_emotion, confidence, annotated_frame
     
